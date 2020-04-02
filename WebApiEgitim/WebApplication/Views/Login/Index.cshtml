@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Üye Girişi</h2>
+<hr />
+
+<div class="row login" style="display:block">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="text-center">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Login
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="username" class="control-label col-md-2">Kullanıcı Adı: </label>
+                                    <div class="col-md-10">
+                                        @Html.TextBox("username", "", new { @class = "form-control", placeholder = "Kullanıcı Adı" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label col-md-2">Şifre</label>
+                                    <div class="col-md-10">
+                                        @Html.TextBox("password", "", new { @class = "form-control", placeholder = "Şifre" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button id="btnSelect" type="button" class="btn btn-primary" onclick="Login()">Giriş</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    function Login() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var loginuser = {
+            username: username,
+            password: password,
+            grant_type: 'password'
+        };
+        //$.post("http://localhost:53808/getToken", loginuser, function (result) {
+        //    sessionStorage.removeItem('BearerToken');
+        //    sessionStorage.setItem('BearerToken', result.access_token);
+        //    alert("giriş başarılıdır");
+        //    window.location.href = "/Personeller/index";
+        //}).fail(function (err) {
+        //    alert("hata: " + err.responseText);
+        //    });
+
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:53808/getToken",
+            data: loginuser,
+            success: function (result) {
+                sessionStorage.removeItem('BearerToken');
+                sessionStorage.setItem('BearerToken', result.access_token);
+                alert("giriş başarılıdır");
+                window.location.href = "/Personeller/index";
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus, errorThrown);
+            },
+        });
+
+    }
+</script>

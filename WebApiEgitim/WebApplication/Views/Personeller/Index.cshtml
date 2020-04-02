@@ -1,0 +1,291 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Personeller</h2>
+<hr />
+
+<div class="row islem">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Personel Bilgileri
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="name" class="control-label col-md-2">Ad</label>
+                                <div class="col-md-10">
+                                    @Html.TextBox("name", "", new { @class = "form-control", placeholder = "Ad" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="surname" class="control-label col-md-2">Soyad</label>
+                                <div class="col-md-10">
+                                    @Html.TextBox("surname", "", new { @class = "form-control", placeholder = "Soyad" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="country" class="control-label col-md-2">Ülke</label>
+                                <div class="col-md-10">
+                                    @Html.TextBox("country", "", new { @class = "form-control", placeholder = "Ülke" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="region" class="control-label col-md-2">Bölge</label>
+                                <div class="col-md-10">
+                                    @Html.TextBox("region", "", new { @class = "form-control", placeholder = "Bölge" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city" class="control-label col-md-2">Şehir</label>
+                                <div class="col-md-10">
+                                    @Html.TextBox("city", "", new { @class = "form-control", placeholder = "Şehir" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button id="btnSelect" type="button" class="btn btn-info" onclick="LaodPersoneller()">Getir</button>
+                <button id="btnCreate" type="button" class="btn btn-primary">Ekle</button>
+                <button id="btnEdit" type="button" class="btn btn-success">Güncelle</button>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Personeller
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul id="personeller" class="list-group"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+                <span id="adet"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    function LaodPersoneller() {
+        var adet1 = $("#adet");
+        var ul = $("#personeller");
+        ul.empty();
+        
+        $.ajax({
+            url: "http://localhost:53808/api/Personeller/SelectPersonellerAll",
+            type: 'GET',
+            //contentType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("BearerToken"));
+            },
+            success: function (response) {
+                if (response == null) {
+                    alert("Personel Listesi Boş");
+                }
+                else {
+                    for (var i = 0; i < response.length; i++) {
+                        var personel = response[i];
+                        var li = $("<li class='list-group-item'>"
+                            + personel.Adi + " "
+                            + personel.Soyadi + " "
+                            + personel.Ulke +
+                            "<button class='btn btn-success' style='float: right' onclick='Edit(" + personel.PersonelID + ")' id='personeledit_" + personel.PersonelID + "'>Düzenle</button>"
+                            + "<button class='btn btn-danger' style='float: right' onclick='Delete(" + personel.PersonelID + ")' id='personeldelete_" + personel.PersonelID + "'>Sil</button >"
+                            + "</li > ");
+                        ul.append(li);
+                    }
+
+                    adet1.text('Toplam Personel Sayısı: ' + response.length);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus + ": " + errorThrown + " - " + XMLHttpRequest.responseText);
+            }
+        });
+
+
+        //$.ajax({
+        //    method: "GET",
+        //    url: "http://localhost:53808/api/Personeller/SelectPersonellerAll",
+        //    type: "json",
+        //    headers: {
+        //        "Authorization": "Bearer " + sessionStorage.getItem("BearerToken")
+        //    }
+        //}).done(function (response, status, jqXHR) {
+        //            for (var i = 0; i < response.length; i++) {
+        //                var personel = response[i];
+        //                var li = $("<li class='list-group-item'>"
+        //                    + personel.Adi + " "
+        //                    + personel.Soyadi + " "
+        //                    + personel.Ulke +
+        //                    "&nbsp&nbsp<button class='btn btn-success' id='personeledit_" + personel.PersonelID + "'>Düzenle</button>"
+        //                    + "&nbsp&nbsp<button class='btn btn-danger' id='personeldelete_" + personel.PersonelID + "'>Sil</button >"
+        //                    +"</li > ");
+        //                ul.append(li);
+        //            }
+
+        //            adet1.text('Toplam Personel Sayısı: ' + response.length);
+
+        //}).fail(function (x) {
+        //    var hatalar = x.responseText.split('"')[3].split(',');
+        //    alert(hatalar[0] + "\n" + hatalar[1] + "\n" + hatalar[2]);
+        //});
+    }
+
+    function CreatePersonel() {
+        var name = $("#name").val();
+        var surname = $("#surname").val();
+        var country = $("#country").val();
+        var region = $("#region").val();
+        var city = $("#city").val();
+
+        var pers = {
+            "Adi": name,
+            "Soyadi": surname,
+            "Ulke": country,
+            "Sehir": city,
+            "Bolge": region
+        };
+        
+        $.ajax({
+            method: "POST",
+            url: "http://localhost:53808/api/Personeller/AddPersoneller",
+            type: "json",
+            data: pers,
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("BearerToken")
+            }
+        }).done(function (response, status, jqXHR) {
+            
+            console.log(response);
+            console.log(status);
+            console.log(jqXHR);
+
+            if (jqXHR.status == 201) {
+                LaodPersoneller();
+            }
+
+            console.log(jqXHR.getResponseHeader("location"));
+
+        }).fail(function (x) {
+            var hatalar = x.responseText.split('"')[3].split(',');
+            alert(hatalar[0] + "\n" + hatalar[1] + "\n" + hatalar[2]);
+        });
+    }
+
+    function Edit(personelid) {
+        
+        var name = $("#name");
+        var surname = $("#surname");
+        var country = $("#country");
+        var region = $("#region");
+        var city = $("#city");
+
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:53808/api/Personeller/SelectPersoneller/" + personelid,
+            contentType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("BearerToken"));
+            },
+            success: function (response) {
+                
+                name.val(response.Adi);
+                surname.val(response.Soyadi);
+                country.val(response.Ulke);
+                region.val(response.Bolge);
+                city.val(response.Sehir);
+                localStorage.setItem("EditPersonelId", personelid);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus + ": " + errorThrown + " - " + XMLHttpRequest.responseText);
+            }
+        });
+    }
+
+    function EditPersonel()
+    {
+        
+        var name = $("#name").val();
+        var surname = $("#surname").val();
+        var country = $("#country").val();
+        var region = $("#region").val();
+        var city = $("#city").val();
+
+        var pers = {
+            "Adi": name,
+            "Soyadi": surname,
+            "Ulke": country,
+            "Sehir": city,
+            "Bolge": region,
+            "PersonelID": localStorage.getItem("EditPersonelId")
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:53808/api/Personeller/UpdatePersoneller",
+            data: pers,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("BearerToken"));
+            },
+            success: function (response) {
+                
+                LaodPersoneller();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                
+                alert(textStatus + ": " + errorThrown + " - " + XMLHttpRequest.responseText);
+            }
+        });
+    }
+
+    function Delete(personelid) {
+        var pers = {
+            "PersonelID": personelid
+        }
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:53808/api/Personeller/DeletePersoneller",
+            data: pers,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("BearerToken"));
+            },
+            success: function (response) {
+                LaodPersoneller();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus + ": " + errorThrown + " - " + XMLHttpRequest.responseText);
+            }
+        });
+    }
+
+    $(function () {
+        //LaodPersoneller();
+        $("#btnCreate").click(CreatePersonel);
+        $("#btnEdit").click(EditPersonel); 
+    });
+
+
+</script>
