@@ -1,9 +1,9 @@
 # WebApiCRUD
 WebApi ile CRUD İşlemleri
 
--Route, RoutePrefix
+-Route, RoutePrefix                                                                                      
 -Cors
--Beare Token
+-Bearer Token
 -Filters
 -Logging
 -Exception Handling
