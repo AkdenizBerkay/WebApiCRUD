@@ -17,7 +17,7 @@ namespace WebApi.DataModel
         public int LogId { get; set; }
         public string MainTable { get; set; }
         public string CrudOperation { get; set; }
-        public int RecordId { get; set; }
+        public Nullable<int> RecordId { get; set; }
         public System.DateTime LogDate { get; set; }
     }
 }

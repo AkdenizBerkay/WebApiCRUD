@@ -11,6 +11,7 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
+    
     [RoutePrefix("api/Personeller"),Authorize]
     public class PersonellerController : ApiController
     {
@@ -22,7 +23,7 @@ namespace WebApi.Controllers
         public HttpResponseMessage SelectPersonellerAll()
         {
             List<PersonellerDTO> personeller = PersonellerDTO.ConvertToPersonelDTOs(db.Personeller.Where(k => k.IsActive == true).ToList());
-            if (personeller == null)
+            if (personeller.Count==0)
             {
                 responseMessage = Request.CreateErrorResponse(HttpStatusCode.NotFound, "Personel listesi boş geldi.");
             }

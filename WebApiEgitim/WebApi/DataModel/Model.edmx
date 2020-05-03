@@ -36,7 +36,7 @@
           <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MainTable" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CrudOperation" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RecordId" Type="int" Nullable="false" />
+          <Property Name="RecordId" Type="int" />
           <Property Name="LogDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Kategoriler">
@@ -509,7 +509,7 @@
           <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MainTable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CrudOperation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RecordId" Type="Int32" Nullable="false" />
+          <Property Name="RecordId" Type="Int32" />
           <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Kategoriler">

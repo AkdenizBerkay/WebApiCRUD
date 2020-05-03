@@ -190,67 +190,67 @@
     <Compile Include="Controllers\PersonellerController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataModel\ApiLogs.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Bolge.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Bolgeler.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\CrudLogs.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Kategoriler.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataModel\MusteriDemographics.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Musteriler.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Nakliyeciler.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\NorthwindEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NorthwindEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\NorthwindEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\NorthwindEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NorthwindEntities.edmx</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Personeller.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Roles.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Satislar.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Satis_Detaylari.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Tedarikciler.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Urunler.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\UserRoles.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Users.cs">
-      <DependentUpon>NorthwindEntities.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Filters\CrudLog.cs" />
     <Compile Include="Filters\PersonelAddValidation.cs" />
@@ -274,15 +274,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="DataModel\NorthwindEntities.Context.tt">
+    <Content Include="DataModel\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>NorthwindEntities.Context.cs</LastGenOutput>
-      <DependentUpon>NorthwindEntities.edmx</DependentUpon>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\NorthwindEntities.tt">
+    <Content Include="DataModel\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NorthwindEntities.edmx</DependentUpon>
-      <LastGenOutput>NorthwindEntities.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -308,12 +308,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="DataModel\NorthwindEntities.edmx">
+    <EntityDeploy Include="DataModel\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NorthwindEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="DataModel\NorthwindEntities.edmx.diagram">
-      <DependentUpon>NorthwindEntities.edmx</DependentUpon>
+    <Content Include="DataModel\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

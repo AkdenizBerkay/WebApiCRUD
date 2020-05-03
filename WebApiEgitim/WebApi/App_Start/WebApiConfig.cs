@@ -15,7 +15,7 @@ namespace WebApi
             // Web API configuration and services
 
             //Cors
-            EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:55708", "*", "*");
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
 
             //Filters

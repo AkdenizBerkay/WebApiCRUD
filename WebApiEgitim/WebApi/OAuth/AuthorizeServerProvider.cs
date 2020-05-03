@@ -24,7 +24,8 @@ namespace WebApi.OAuth
 
             using (NorthwindEntities db = new NorthwindEntities())
             {
-                Users user = db.Users.Where(k => k.UserName.Equals(context.UserName, StringComparison.OrdinalIgnoreCase) && k.Password == context.Password).FirstOrDefault();
+                
+                Users user = db.Users.Where(k => k.Mail.Equals(context.UserName, StringComparison.OrdinalIgnoreCase) && k.Password == context.Password).FirstOrDefault();
                 if (user == null)
                 {
                     context.SetError("Oturum Hatası", "Kullanıcı Adı veya Şifre Hatalı");
